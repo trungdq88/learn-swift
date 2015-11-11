@@ -59,9 +59,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let movie = movies[indexPath.row]
         let cell = tableView.dequeueReusableCellWithIdentifier("movieCell") as! MovieCell
         cell.titleLabel.text = movie["title"] as? String
-        
-        let poster = movie["posters"] as! NSDictionary
-        let url = poster["thumbnail"] as! String
+        let url = movie.valueForKeyPath("posters.thumbnail") as! String
         let imageURL = NSURL(string: url)
         cell.thumbnailImg.setImageWithURL(imageURL!)
         return cell;
@@ -71,6 +69,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return movies.count;
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let cell = sender as! MovieCell
+        let indexPath = tableView.indexPathForCell(cell)
+        let movie = movies[indexPath!.row]
+        let movieDetailViewController = segue.destinationViewController as!MovieDetailViewController
+        movieDetailViewController.movie = movie
+    }
 
 }
 
