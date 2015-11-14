@@ -27,6 +27,8 @@
 		02F64A591BF783A9009E8CD9 /* DvdsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F64A581BF783A9009E8CD9 /* DvdsApi.swift */; };
 		02F64A5B1BF78DD1009E8CD9 /* MovieListHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F64A5A1BF78DD1009E8CD9 /* MovieListHandler.swift */; };
 		02F64A5D1BF78E80009E8CD9 /* MovieDynamicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F64A5C1BF78E80009E8CD9 /* MovieDynamicViewController.swift */; };
+		02F64A621BF79D99009E8CD9 /* Grid.png in Resources */ = {isa = PBXBuildFile; fileRef = 02F64A601BF79D99009E8CD9 /* Grid.png */; };
+		02F64A631BF79D99009E8CD9 /* List.png in Resources */ = {isa = PBXBuildFile; fileRef = 02F64A611BF79D99009E8CD9 /* List.png */; };
 		8D642B9666C96576924DDEAB /* Pods_MovieReview.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF59BAF151C8C0870376E93A /* Pods_MovieReview.framework */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +55,8 @@
 		02F64A581BF783A9009E8CD9 /* DvdsApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DvdsApi.swift; sourceTree = "<group>"; };
 		02F64A5A1BF78DD1009E8CD9 /* MovieListHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieListHandler.swift; sourceTree = "<group>"; };
 		02F64A5C1BF78E80009E8CD9 /* MovieDynamicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDynamicViewController.swift; sourceTree = "<group>"; };
+		02F64A601BF79D99009E8CD9 /* Grid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Grid.png; sourceTree = "<group>"; };
+		02F64A611BF79D99009E8CD9 /* List.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = List.png; sourceTree = "<group>"; };
 		B1FE8E7E0AEC9F1A616BAA44 /* Pods-MovieReview.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieReview.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MovieReview/Pods-MovieReview.debug.xcconfig"; sourceTree = "<group>"; };
 		DF59BAF151C8C0870376E93A /* Pods_MovieReview.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MovieReview.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0D6E131FB9C43A534A54FC8 /* Pods-MovieReview.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieReview.release.xcconfig"; path = "Pods/Target Support Files/Pods-MovieReview/Pods-MovieReview.release.xcconfig"; sourceTree = "<group>"; };
@@ -150,6 +154,8 @@
 		02F64A4B1BF78026009E8CD9 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				02F64A601BF79D99009E8CD9 /* Grid.png */,
+				02F64A611BF79D99009E8CD9 /* List.png */,
 				02F64A501BF780B3009E8CD9 /* DVD Logo Filled-25.png */,
 				02F64A511BF780B3009E8CD9 /* Movie-25.png */,
 			);
@@ -239,6 +245,8 @@
 				029434BE1BF0CC6F00E1371C /* LaunchScreen.storyboard in Resources */,
 				02F64A521BF780B3009E8CD9 /* DVD Logo Filled-25.png in Resources */,
 				029434BB1BF0CC6F00E1371C /* Assets.xcassets in Resources */,
+				02F64A621BF79D99009E8CD9 /* Grid.png in Resources */,
+				02F64A631BF79D99009E8CD9 /* List.png in Resources */,
 				02F64A531BF780B3009E8CD9 /* Movie-25.png in Resources */,
 				029434B91BF0CC6F00E1371C /* Main.storyboard in Resources */,
 			);

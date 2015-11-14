@@ -49,23 +49,12 @@ class MovieListViewController: UIViewController {
         super.viewDidLoad()
         
         // Fetch movies to view
-        var shouldShowLoading = true    // This variable is use to idicate if we
-                                        // should show the loading animation or not
-        loadMovies({() -> Void in
-            shouldShowLoading = false
-            JTProgressHUD.hide()
-        }, disableCache: false)
-        if (shouldShowLoading) {
-            JTProgressHUD.show()
-        }
+        loadMoviesWithAnimation()
         
         // Refresh control
         self.addNetworkStatusLabel()
         self.view.addSubview(lblNetworkStatus)
-        refreshControl = UIRefreshControl()
-        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        refreshControl.addTarget(self, action: "onRefresh", forControlEvents: UIControlEvents.ValueChanged)
-        getScrollView().addSubview(refreshControl)
+        addRefreshControl(getScrollView())
         
         // Subcribe for network event for load movies
         // In case app startd with no network connection
@@ -97,20 +86,31 @@ class MovieListViewController: UIViewController {
                 })
         }
         
-        // View mode switcher
-        let btnName = UIButton()
-        btnName.setImage(UIImage(named: "Movie-25.png"), forState: .Normal)
-        btnName.frame = CGRectMake(0, 0, 30, 30)
-        btnName.addTarget(self, action: Selector("action"), forControlEvents: .TouchUpInside)
-        
-        //.... Set Right/Left Bar Button item
-        let rightBarButton = UIBarButtonItem()
-        rightBarButton.customView = btnName
-        self.navigationItem.rightBarButtonItem = rightBarButton
         
         // Uncomment this line to disable cache
         // NSURLCache.sharedURLCache().removeAllCachedResponses()
         
+    }
+    
+    // Add "pull to refresh" control to UIScrollView
+    func addRefreshControl(control: UIScrollView) {
+        refreshControl = UIRefreshControl()
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl.addTarget(self, action: "onRefresh", forControlEvents: UIControlEvents.ValueChanged)
+        control.addSubview(refreshControl)
+    }
+    
+    // Reload movies, show loading animation if needed
+    func loadMoviesWithAnimation() {
+        var shouldShowLoading = true    // This variable is use to idicate if we
+                                        // should show the loading animation or not
+        loadMovies({() -> Void in
+            shouldShowLoading = false
+            JTProgressHUD.hide()
+            }, disableCache: false)
+        if (shouldShowLoading) {
+            JTProgressHUD.show()
+        }
     }
     
     // Add the UILabel that show network status
