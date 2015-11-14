@@ -14,6 +14,7 @@ Completed user stories:
 - [x] Implement segmented control to switch between list view and grid view (optional)
 - [x] All images fade in (optional)
 - [x] For the large poster, load the low-res image first, switch to high-res when complete (optional)
+- [x] Add a tab bar for Box Office and DVD. (optional)
 
 Walkthrough of all user stories:
 
