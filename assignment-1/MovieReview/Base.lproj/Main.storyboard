@@ -65,7 +65,7 @@
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Movies" id="kym-3J-4Ml"/>
+                    <tabBarItem key="tabBarItem" title="List" selectedImage="dvd" id="kym-3J-4Ml"/>
                     <navigationItem key="navigationItem" title="Movies" id="hec-mB-Xhr"/>
                     <connections>
                         <outlet property="tableView" destination="CeN-9a-pN7" id="p0Z-Q2-G0E"/>
@@ -132,7 +132,7 @@
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="DVDs" id="V6L-Vb-6ZV"/>
+                    <tabBarItem key="tabBarItem" title="Grid" id="V6L-Vb-6ZV"/>
                     <navigationItem key="navigationItem" title="DVDs" id="DGG-H8-DN8"/>
                     <connections>
                         <outlet property="collectionView" destination="yhZ-Db-vAt" id="7FU-d3-25U"/>
@@ -235,6 +235,9 @@
             <point key="canvasLocation" x="1377" y="311"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="dvd" width="256" height="256"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="LwH-gE-r1o"/>
     </inferredMetricsTieBreakers>
