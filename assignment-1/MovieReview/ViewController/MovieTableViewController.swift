@@ -14,10 +14,19 @@ import Reachability
 
 class MovieTableViewController: MovieListViewController {
 
+    // This screen uses UITableView to display movies
     @IBOutlet var tableView: UITableView!
     
     // Controller for tableView
     var handler = MovieTableHandler()
+    
+    // API
+    var theaterApi = TheaterApi()
+    
+    // This screen displays theater movie
+    override func getApi() -> MovieApi {
+        return theaterApi
+    }
     
     // This view controller uses UITableView to display data
     override func getScrollView() -> UIScrollView {

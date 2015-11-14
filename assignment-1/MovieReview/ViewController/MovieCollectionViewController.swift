@@ -10,12 +10,19 @@ import UIKit
 
 class MovieCollectionViewController: MovieListViewController {
 
-    
+    // This screen uses UICollectionView to display movies
     @IBOutlet var collectionView: UICollectionView!
     
-    // Controller for tableView
-    // var movieTable = MovieTable()
+    // Controller for collectionView
     var handler = MovieCollectionHandler()
+    
+    // API
+    var dvdsApi = DvdsApi()
+    
+    // This screen displays dvds movie
+    override func getApi() -> MovieApi {
+        return dvdsApi
+    }
     
     // This view controller uses UITableView to display data
     override func getScrollView() -> UIScrollView {

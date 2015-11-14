@@ -12,8 +12,13 @@ import JTProgressHUD
 import Reachability
 
 /// This is an abstract class responsible for display list of movie
-/// Move list can be displayed in many "mode" (ex: TableView, CollectionView, CustomView...)
-/// You can extend this class to use some reusable code (like pull to refresh, network status events...)
+/// Move list can be displayed in many "mode" (ex: TableView, CollectionView, 
+/// CustomView...) with data loaded from custom API endpoint
+///
+/// You can extend this class to use some reusable code (like pull to refresh, 
+/// network status events...)
+///
+/// MovieListViewController
 class MovieListViewController: UIViewController {
     var lblNetworkStatus: UILabel!
     
@@ -23,8 +28,11 @@ class MovieListViewController: UIViewController {
     // For "Pull to request"
     var refreshControl: UIRefreshControl!
     
-    // Movie API
-    var movieApi = MovieApi()
+    // The View controller must have a specific API attached to it
+    // For example, theater movies will be loaded from theater API, same to dvd movies
+    func getApi() -> MovieApi {
+        preconditionFailure("This method must be overridden")
+    }
     
     // The View Controller must have a UIScrollView (could be UITableView or
     // UICollectionView), this UIScrollView will be used for "Pull to refresh" feature
@@ -124,7 +132,7 @@ class MovieListViewController: UIViewController {
     
     // Load movies and fill data to view, set disableCache = true to not using memory cache.
     func loadMovies(callback: () -> Void, disableCache: Bool) {
-        self.movieApi.getMovies({ (movies) -> Void in
+        self.getApi().getMovies({ (movies) -> Void in
             self.fillData(movies)
             callback()
         }, disableCache: disableCache)

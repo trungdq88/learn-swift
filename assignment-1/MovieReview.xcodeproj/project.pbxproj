@@ -20,6 +20,11 @@
 		02F64A431BF73B97009E8CD9 /* MovieListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F64A421BF73B97009E8CD9 /* MovieListViewController.swift */; };
 		02F64A471BF74292009E8CD9 /* MovieCollectionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F64A461BF74292009E8CD9 /* MovieCollectionHandler.swift */; };
 		02F64A491BF74355009E8CD9 /* MovieCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F64A481BF74355009E8CD9 /* MovieCollectionCell.swift */; };
+		02F64A521BF780B3009E8CD9 /* DVD Logo Filled-25.png in Resources */ = {isa = PBXBuildFile; fileRef = 02F64A501BF780B3009E8CD9 /* DVD Logo Filled-25.png */; };
+		02F64A531BF780B3009E8CD9 /* Movie-25.png in Resources */ = {isa = PBXBuildFile; fileRef = 02F64A511BF780B3009E8CD9 /* Movie-25.png */; };
+		02F64A551BF781D6009E8CD9 /* TheaterApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F64A541BF781D6009E8CD9 /* TheaterApi.swift */; };
+		02F64A571BF782AA009E8CD9 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F64A561BF782AA009E8CD9 /* Config.swift */; };
+		02F64A591BF783A9009E8CD9 /* DvdsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F64A581BF783A9009E8CD9 /* DvdsApi.swift */; };
 		8D642B9666C96576924DDEAB /* Pods_MovieReview.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF59BAF151C8C0870376E93A /* Pods_MovieReview.framework */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +44,11 @@
 		02F64A421BF73B97009E8CD9 /* MovieListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieListViewController.swift; sourceTree = "<group>"; };
 		02F64A461BF74292009E8CD9 /* MovieCollectionHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieCollectionHandler.swift; sourceTree = "<group>"; };
 		02F64A481BF74355009E8CD9 /* MovieCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieCollectionCell.swift; sourceTree = "<group>"; };
+		02F64A501BF780B3009E8CD9 /* DVD Logo Filled-25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DVD Logo Filled-25.png"; sourceTree = "<group>"; };
+		02F64A511BF780B3009E8CD9 /* Movie-25.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Movie-25.png"; sourceTree = "<group>"; };
+		02F64A541BF781D6009E8CD9 /* TheaterApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TheaterApi.swift; sourceTree = "<group>"; };
+		02F64A561BF782AA009E8CD9 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		02F64A581BF783A9009E8CD9 /* DvdsApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DvdsApi.swift; sourceTree = "<group>"; };
 		B1FE8E7E0AEC9F1A616BAA44 /* Pods-MovieReview.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieReview.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MovieReview/Pods-MovieReview.debug.xcconfig"; sourceTree = "<group>"; };
 		DF59BAF151C8C0870376E93A /* Pods_MovieReview.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MovieReview.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0D6E131FB9C43A534A54FC8 /* Pods-MovieReview.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieReview.release.xcconfig"; path = "Pods/Target Support Files/Pods-MovieReview/Pods-MovieReview.release.xcconfig"; sourceTree = "<group>"; };
@@ -77,6 +87,7 @@
 		029434B21BF0CC6F00E1371C /* MovieReview */ = {
 			isa = PBXGroup;
 			children = (
+				02F64A4B1BF78026009E8CD9 /* Images */,
 				02F64A4A1BF7584B009E8CD9 /* Handler */,
 				02F64A391BF7281A009E8CD9 /* Business */,
 				02F64A381BF7250A009E8CD9 /* View */,
@@ -114,6 +125,9 @@
 			isa = PBXGroup;
 			children = (
 				02F64A3A1BF728A1009E8CD9 /* MovieApi.swift */,
+				02F64A541BF781D6009E8CD9 /* TheaterApi.swift */,
+				02F64A581BF783A9009E8CD9 /* DvdsApi.swift */,
+				02F64A561BF782AA009E8CD9 /* Config.swift */,
 			);
 			path = Business;
 			sourceTree = "<group>";
@@ -125,6 +139,16 @@
 				02F64A461BF74292009E8CD9 /* MovieCollectionHandler.swift */,
 			);
 			path = Handler;
+			sourceTree = "<group>";
+		};
+		02F64A4B1BF78026009E8CD9 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				02F64A501BF780B3009E8CD9 /* DVD Logo Filled-25.png */,
+				02F64A511BF780B3009E8CD9 /* Movie-25.png */,
+			);
+			name = Images;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		5B0B538675C9C25624B2E11A /* Frameworks */ = {
@@ -207,7 +231,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				029434BE1BF0CC6F00E1371C /* LaunchScreen.storyboard in Resources */,
+				02F64A521BF780B3009E8CD9 /* DVD Logo Filled-25.png in Resources */,
 				029434BB1BF0CC6F00E1371C /* Assets.xcassets in Resources */,
+				02F64A531BF780B3009E8CD9 /* Movie-25.png in Resources */,
 				029434B91BF0CC6F00E1371C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -272,11 +298,14 @@
 				029434B61BF0CC6F00E1371C /* MovieTableViewController.swift in Sources */,
 				02F64A3B1BF728A1009E8CD9 /* MovieApi.swift in Sources */,
 				029434B41BF0CC6F00E1371C /* AppDelegate.swift in Sources */,
+				02F64A571BF782AA009E8CD9 /* Config.swift in Sources */,
 				029434C61BF0D19D00E1371C /* MovieTableCell.swift in Sources */,
 				02F64A491BF74355009E8CD9 /* MovieCollectionCell.swift in Sources */,
 				02F64A3D1BF72A3D009E8CD9 /* MovieTableHandler.swift in Sources */,
 				02F64A3F1BF73834009E8CD9 /* MovieCollectionViewController.swift in Sources */,
 				02F64A431BF73B97009E8CD9 /* MovieListViewController.swift in Sources */,
+				02F64A551BF781D6009E8CD9 /* TheaterApi.swift in Sources */,
+				02F64A591BF783A9009E8CD9 /* DvdsApi.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
