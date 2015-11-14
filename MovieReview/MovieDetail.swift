@@ -8,10 +8,9 @@
 
 import UIKit
 import AFNetworking
+class MovieDetail: UIViewController {
 
-class MovieDetailViewController: UIViewController {
-
-    @IBOutlet var imageView: UIImageView!
+    @IBOutlet var imgThumb: UIImageView!
     @IBOutlet var lblTitle: UILabel!
     @IBOutlet var lblDescription: UILabel!
     
@@ -19,12 +18,21 @@ class MovieDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        let urlThumb = movie.valueForKeyPath("posters.thumbnail") as! String
+        let urlFull = movie.valueForKeyPath("posters.detailed") as! String
+        let thumbURL = NSURL(string: urlThumb)
+        let fullURL = NSURL(string: urlFull)
+        let request = NSURLRequest(URL: fullURL!)
+        
         lblTitle.text = movie["title"] as? String
-        let url = movie.valueForKeyPath("posters.thumbnail") as! String
-        let imageURL = NSURL(string: url)
-        imageView.setImageWithURL(imageURL!)
+        lblDescription.text = movie["synopsis"] as? String
+        imgThumb.setImageWithURL(thumbURL!) // Obviously cached from list view
+        imgThumb.setImageWithURLRequest(request, placeholderImage: imgThumb.image, success: { (NSURLRequest, NSHTTPURLResponse, image) -> Void in
+            self.imgThumb.image = image
+            }) { (NSURLRequest, NSHTTPURLResponse, NSError) -> Void in
+                
+        }
 
     }
 

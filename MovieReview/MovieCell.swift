@@ -12,8 +12,9 @@ class MovieCell: UITableViewCell {
 
     
     
-    @IBOutlet var titleLabel: UILabel!
-    @IBOutlet var thumbnailImg: UIImageView!
+    @IBOutlet var lblTitle: UILabel!
+    @IBOutlet var lblDescription: UILabel!
+    @IBOutlet var imgThumb: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

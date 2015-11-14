@@ -20,11 +20,17 @@ PODS:
   - AFNetworking/UIKit (2.6.2):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - JTProgressHUD (1.0.3)
+  - Reachability (3.2)
 
 DEPENDENCIES:
   - AFNetworking
+  - JTProgressHUD
+  - Reachability
 
 SPEC CHECKSUMS:
   AFNetworking: 7f317038a9710cabfa43ec56396b307b45df72ab
+  JTProgressHUD: d2519c41e664acb554932aac12f5a94b47d88a69
+  Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
 
 COCOAPODS: 0.39.0

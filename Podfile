@@ -5,5 +5,7 @@ use_frameworks!
 
 target 'MovieReview' do
   pod 'AFNetworking'
+  pod 'JTProgressHUD'
+  pod 'Reachability'
 end
 
