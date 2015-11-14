@@ -26,7 +26,6 @@ class MovieCollectionViewController: MovieListViewController {
     override func fillData(movies: [NSDictionary]) {
         self.handler.movies = movies
         self.collectionView.reloadData()
-        print("collection view load: ", movies.count)
     }
     
     override func viewDidLoad() {

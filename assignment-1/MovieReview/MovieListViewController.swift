@@ -40,11 +40,16 @@ class MovieListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Fetch movies to table
-        JTProgressHUD.show()
+        // Fetch movies to view
+        var shouldShowLoading = true    // This variable is use to idicate if we
+                                        // should show the loading animation or not
         loadMovies({() -> Void in
+            shouldShowLoading = false
             JTProgressHUD.hide()
-        })
+        }, disableCache: false)
+        if (shouldShowLoading) {
+            JTProgressHUD.show()
+        }
         
         // Refresh control
         self.addNetworkStatusLabel()
@@ -109,13 +114,18 @@ class MovieListViewController: UIViewController {
             // Do nothing
         }
     }
+
+    // Overload for loadMovie(callback, disableCache)
+    func loadMovies(callback: () -> Void) {
+        loadMovies(callback, disableCache: true)
+    }
     
     // Load movies and refresh data table
-    func loadMovies(callback: () -> Void) {
-        self.movieApi.fetchMovies { (movies) -> Void in
+    func loadMovies(callback: () -> Void, disableCache: Bool) {
+        self.movieApi.getMovies({ (movies) -> Void in
             self.fillData(movies)
             callback()
-        }
+        }, disableCache: disableCache)
     }
     
     // Just an overload for subcribeNetworkEvent(onReachable, onUnreachable)

@@ -13,6 +13,8 @@ class MovieApi: NSObject {
     
     let API_ENDPOINT = "https://coderschool-movies.herokuapp.com/movies?api_key=xja087zcvxljadsflh214";
     
+    static var movies = [NSDictionary]()
+    
     // Fetch movies
     func fetchMovies(callback : (movies: [NSDictionary]) -> Void) {
         
@@ -28,11 +30,25 @@ class MovieApi: NSObject {
             let json = try! NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments) as! NSDictionary
             
             dispatch_async(dispatch_get_main_queue(), {() -> Void in
-                let movies = json["movies"] as! [NSDictionary]
-                callback(movies: movies)
+                MovieApi.movies = json["movies"] as! [NSDictionary]
+                callback(movies: MovieApi.movies)
             })
         }
         task.resume()
     }
 
+    // Get movies with cache = disableCache
+    // Is this useless?
+    func getMovies(callback : (movies: [NSDictionary]) -> Void, disableCache: Bool) {
+        if (disableCache || MovieApi.movies.count == 0) {
+            fetchMovies(callback)
+        } else {
+            callback(movies: MovieApi.movies)
+        }
+    }
+    
+    // Get movies with cache = true
+    func getMovies(callback : (movies: [NSDictionary]) -> Void) {
+        getMovies(callback, disableCache: false)
+    }
 }
