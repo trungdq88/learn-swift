@@ -9,13 +9,13 @@
 import UIKit
 
 // This class controls the Movie List table
-class MovieTable: NSObject, UITableViewDelegate, UITableViewDataSource {
+class MovieTableHandler: NSObject, UITableViewDelegate, UITableViewDataSource {
     
     var movies = [NSDictionary]()
     
     // Return cell for each row
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("movieCell") as! MovieCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("movieTableCell") as! MovieTableCell
         if (indexPath.row > movies.count - 1) {
             return cell;
         }

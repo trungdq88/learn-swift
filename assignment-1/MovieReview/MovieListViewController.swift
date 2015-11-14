@@ -1,8 +1,8 @@
 //
-//  ViewController.swift
+//  AbstractMovieListViewController.swift
 //  MovieReview
 //
-//  Created by Dinh Quang Trung on 11/9/15.
+//  Created by Dinh Quang Trung on 11/14/15.
 //  Copyright © 2015 HAC. All rights reserved.
 //
 
@@ -11,11 +11,11 @@ import AFNetworking
 import JTProgressHUD
 import Reachability
 
-
-class MovieList: UIViewController {
-
-    @IBOutlet var tableView: UITableView!
-    @IBOutlet var lblNetworkStatus: UILabel!
+/// This is an abstract class responsible for display list of movie
+/// Move list can be displayed in many "mode" (ex: TableView, CollectionView, CustomView...)
+/// You can extend this class to use some reusable code (like pull to refresh, network status events...)
+class MovieListViewController: UIViewController {
+    var lblNetworkStatus: UILabel!
     
     // For network change events
     var reach: Reachability?
@@ -26,15 +26,19 @@ class MovieList: UIViewController {
     // Movie API
     var movieApi = MovieApi()
     
-    // Controller for tableView
-    var movieTable = MovieTable()
+    // The View Controller must have a UIScrollView (could be UITableView or
+    // UICollectionView), this UIScrollView will be used for "Pull to refresh" feature
+    func getScrollView() -> UIScrollView {
+        preconditionFailure("This method must be overridden")
+    }
+    
+    // This method will fill data to the view (could be UITableView or UICollection View)
+    func fillData(movies: [NSDictionary]) {
+        preconditionFailure("This method must be overridden")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Assign controller for tableView
-        tableView.dataSource = movieTable
-        tableView.delegate = movieTable
         
         // Fetch movies to table
         JTProgressHUD.show()
@@ -43,10 +47,12 @@ class MovieList: UIViewController {
         })
         
         // Refresh control
+        self.addNetworkStatusLabel()
+        self.view.addSubview(lblNetworkStatus)
         refreshControl = UIRefreshControl()
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl.addTarget(self, action: "onRefresh", forControlEvents: UIControlEvents.ValueChanged)
-        tableView.addSubview(refreshControl)
+        getScrollView().addSubview(refreshControl)
         
         // Subcribe for network event for load movies
         // In case app startd with no network connection
@@ -66,7 +72,7 @@ class MovieList: UIViewController {
                     self.lblNetworkStatus.alpha = 0
                 }, completion: { (result) -> Void in
                     self.lblNetworkStatus.hidden = true
-                })
+            })
             }) { () -> Void in
                 // Show label
                 self.lblNetworkStatus.hidden = false
@@ -83,6 +89,20 @@ class MovieList: UIViewController {
         
     }
     
+    func addNetworkStatusLabel() {
+        // TODO: layout position in this project is so wrong...
+        lblNetworkStatus = UILabel(frame: CGRectMake(0, 0, 320, 50))
+        lblNetworkStatus.center = CGPointMake(160, 90)
+        lblNetworkStatus.textAlignment = NSTextAlignment.Center
+        lblNetworkStatus.backgroundColor = UIColor.blackColor()
+        lblNetworkStatus.textColor = UIColor.whiteColor()
+        lblNetworkStatus.font = UIFont(name: lblNetworkStatus.font.fontName, size: 14)
+        lblNetworkStatus.numberOfLines = 0
+        lblNetworkStatus.alpha = 0
+        lblNetworkStatus.hidden = true
+        lblNetworkStatus.text = "Hmm... You are currently offline. Please check your connection"
+    }
+    
     // Overload for loadMovie(callback)
     func loadMovies() {
         loadMovies { () -> Void in
@@ -93,8 +113,7 @@ class MovieList: UIViewController {
     // Load movies and refresh data table
     func loadMovies(callback: () -> Void) {
         self.movieApi.fetchMovies { (movies) -> Void in
-            self.movieTable.movies = movies
-            self.tableView.reloadData()
+            self.fillData(movies)
             callback()
         }
     }
@@ -139,15 +158,5 @@ class MovieList: UIViewController {
             self.refreshControl.endRefreshing()
         })
     }
-        
-    // Send movie JSON object to MovieDetail view controller
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let cell = sender as! MovieCell
-        let indexPath = tableView.indexPathForCell(cell)
-        let movie = self.movieTable.movies[indexPath!.row]
-        let movieDetailViewController = segue.destinationViewController as!MovieDetail
-        movieDetailViewController.movie = movie
-    }
-
+    
 }
-

@@ -8,7 +8,7 @@
 
 import UIKit
 import AFNetworking
-class MovieDetail: UIViewController {
+class MovieDetailViewController: UIViewController {
 
     @IBOutlet var imgBackground: UIImageView!
     @IBOutlet var lblTitle: UILabel!

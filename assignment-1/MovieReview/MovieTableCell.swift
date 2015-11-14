@@ -9,7 +9,7 @@
 import UIKit
 
 // This class handle cells in table
-class MovieCell: UITableViewCell {
+class MovieTableCell: UITableViewCell {
 
     @IBOutlet var lblTitle: UILabel!
     @IBOutlet var lblDescription: UILabel!
