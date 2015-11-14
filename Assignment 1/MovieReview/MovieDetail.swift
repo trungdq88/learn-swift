@@ -10,10 +10,11 @@ import UIKit
 import AFNetworking
 class MovieDetail: UIViewController {
 
-    @IBOutlet var imgThumb: UIImageView!
+    @IBOutlet var imgBackground: UIImageView!
     @IBOutlet var lblTitle: UILabel!
-    @IBOutlet var lblDescription: UILabel!
+    @IBOutlet var txtDescription: UITextView!
     
+    // Data passed from MovieList
     var movie: NSDictionary!
     
     override func viewDidLoad() {
@@ -26,12 +27,18 @@ class MovieDetail: UIViewController {
         let request = NSURLRequest(URL: fullURL!)
         
         lblTitle.text = movie["title"] as? String
-        lblDescription.text = movie["synopsis"] as? String
-        imgThumb.setImageWithURL(thumbURL!) // Obviously cached from list view
-        imgThumb.setImageWithURLRequest(request, placeholderImage: imgThumb.image, success: { (NSURLRequest, NSHTTPURLResponse, image) -> Void in
-            self.imgThumb.image = image
+        txtDescription.text = movie["synopsis"] as? String
+        
+        // Show thumbnail first
+        imgBackground.setImageWithURL(thumbURL!) // Obviously cached from list view
+        
+        // Then load full image later
+        imgBackground.setImageWithURLRequest(request,
+            placeholderImage: imgBackground.image,
+            success: { (imgBackground, NSHTTPURLResponse, image) -> Void in
+                self.imgBackground.image = image
             }) { (NSURLRequest, NSHTTPURLResponse, NSError) -> Void in
-                
+            // Do nothing, keep the thumbnail as background
         }
 
     }
