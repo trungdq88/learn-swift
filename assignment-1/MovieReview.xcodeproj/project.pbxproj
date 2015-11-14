@@ -159,8 +159,7 @@
 				02F64A501BF780B3009E8CD9 /* DVD Logo Filled-25.png */,
 				02F64A511BF780B3009E8CD9 /* Movie-25.png */,
 			);
-			name = Images;
-			path = ..;
+			path = Images;
 			sourceTree = "<group>";
 		};
 		5B0B538675C9C25624B2E11A /* Frameworks */ = {
