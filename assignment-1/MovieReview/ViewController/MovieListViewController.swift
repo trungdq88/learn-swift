@@ -94,6 +94,8 @@ class MovieListViewController: UIViewController {
         
     }
     
+    // Add the UILabel that show network status
+    // TODO: is this the right way? How does Facebook do it?
     func addNetworkStatusLabel() {
         // TODO: layout position in this project is so wrong...
         lblNetworkStatus = UILabel(frame: CGRectMake(0, 0, 320, 50))
@@ -120,7 +122,7 @@ class MovieListViewController: UIViewController {
         loadMovies(callback, disableCache: true)
     }
     
-    // Load movies and refresh data table
+    // Load movies and fill data to view, set disableCache = true to not using memory cache.
     func loadMovies(callback: () -> Void, disableCache: Bool) {
         self.movieApi.getMovies({ (movies) -> Void in
             self.fillData(movies)

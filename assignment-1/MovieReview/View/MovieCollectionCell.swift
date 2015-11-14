@@ -13,6 +13,7 @@ class MovieCollectionCell: UICollectionViewCell {
     @IBOutlet var lblTitle: UILabel!
     @IBOutlet var imgThumb: UIImageView!
     
+    // Display information to cell
     func setMovie(movie: NSDictionary) {
         
         let url = movie.valueForKeyPath("posters.thumbnail") as! String

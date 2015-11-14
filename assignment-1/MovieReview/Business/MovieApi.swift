@@ -11,8 +11,10 @@ import UIKit
 // This class responsible for loading data related to movies
 class MovieApi: NSObject {
     
+    // Mirror for tomato rotten API from coderschool
     let API_ENDPOINT = "https://coderschool-movies.herokuapp.com/movies?api_key=xja087zcvxljadsflh214";
     
+    // Static variable for memory cache
     static var movies = [NSDictionary]()
     
     // Fetch movies
@@ -38,7 +40,7 @@ class MovieApi: NSObject {
     }
 
     // Get movies with cache = disableCache
-    // Is this useless?
+    // Is this (memory cache) useless?
     func getMovies(callback : (movies: [NSDictionary]) -> Void, disableCache: Bool) {
         if (disableCache || MovieApi.movies.count == 0) {
             fetchMovies(callback)

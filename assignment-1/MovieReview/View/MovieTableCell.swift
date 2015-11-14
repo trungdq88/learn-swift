@@ -15,10 +15,6 @@ class MovieTableCell: UITableViewCell {
     @IBOutlet var lblDescription: UILabel!
     @IBOutlet var imgThumb: UIImageView!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-    
     // Show information to the cell
     func setMovie(movie: NSDictionary) {
         let url = movie.valueForKeyPath("posters.thumbnail") as! String
