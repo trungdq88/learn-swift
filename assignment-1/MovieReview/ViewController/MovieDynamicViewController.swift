@@ -22,7 +22,13 @@ class MovieDynamicViewController: MovieListViewController, UITabBarDelegate {
     @IBOutlet var tabItemMovie: UITabBarItem!
     @IBOutlet var tabItemDvds: UITabBarItem!
     
+    // View mode switch button (show at navigation right)
     let btnName = UIButton()
+    
+    // This view use separate refresh controls, we don't reuse from MovieListViewController
+    // because it has to UIScrollView working in parallel
+    var refreshControl1 = UIRefreshControl()
+    var refreshControl2 = UIRefreshControl()
     
     // Constants
     let VIEW_MODE = (LIST: "list", GRID: "grid")
@@ -107,8 +113,7 @@ class MovieDynamicViewController: MovieListViewController, UITabBarDelegate {
         setViewMode(VIEW_MODE.LIST)
         
         // Add refresh control to the other `UIScrollView`s
-        addRefreshControl(collectionView)
-        addRefreshControl(tableView)
+        addRefreshControls()
         
         // Handler for tab select
         tabCategory.delegate = self
@@ -124,6 +129,32 @@ class MovieDynamicViewController: MovieListViewController, UITabBarDelegate {
         rightBarButton.customView = btnName
         self.navigationItem.rightBarButtonItem = rightBarButton
         
+    }
+    
+    // This view use separate refresh controls, we don't reuse from MovieListViewController
+    // because it has to UIScrollView working in parallel
+    func addRefreshControls() {
+        refreshControl1.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl1.addTarget(self, action: "onRefreshTableView", forControlEvents: UIControlEvents.ValueChanged)
+        tableView.addSubview(refreshControl1)
+        
+        refreshControl2.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl2.addTarget(self, action: "onRefreshCollectionView", forControlEvents: UIControlEvents.ValueChanged)
+        collectionView.addSubview(refreshControl2)
+    }
+    
+    // Refresh from UITableView
+    func onRefreshTableView() {
+        self.loadMovies({() -> Void in
+            self.refreshControl1.endRefreshing()
+        })
+    }
+    
+    // Refresh from UICollectionView
+    func onRefreshCollectionView() {
+        self.loadMovies({() -> Void in
+            self.refreshControl2.endRefreshing()
+        })
     }
     
     // Handle switch between list and grid view mode

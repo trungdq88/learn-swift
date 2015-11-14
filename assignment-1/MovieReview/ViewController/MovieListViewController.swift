@@ -26,7 +26,7 @@ class MovieListViewController: UIViewController {
     var reach: Reachability?
     
     // For "Pull to request"
-    var refreshControl: UIRefreshControl!
+    var refreshControl = UIRefreshControl()
     
     // The View controller must have a specific API attached to it
     // For example, theater movies will be loaded from theater API, same to dvd movies
@@ -54,7 +54,7 @@ class MovieListViewController: UIViewController {
         // Refresh control
         self.addNetworkStatusLabel()
         self.view.addSubview(lblNetworkStatus)
-        addRefreshControl(getScrollView())
+        addRefreshControl(self.refreshControl, control: getScrollView())
         
         // Subcribe for network event for load movies
         // In case app startd with no network connection
@@ -93,8 +93,7 @@ class MovieListViewController: UIViewController {
     }
     
     // Add "pull to refresh" control to UIScrollView
-    func addRefreshControl(control: UIScrollView) {
-        refreshControl = UIRefreshControl()
+    func addRefreshControl(refreshControl: UIRefreshControl, control: UIScrollView) {
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl.addTarget(self, action: "onRefresh", forControlEvents: UIControlEvents.ValueChanged)
         control.addSubview(refreshControl)
