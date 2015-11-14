@@ -11,6 +11,7 @@ import UIKit
 class MovieCollectionCell: UICollectionViewCell {
     
     @IBOutlet var lblTitle: UILabel!
+    @IBOutlet var lblRelease: UILabel!
     @IBOutlet var imgThumb: UIImageView!
     
     // Display information to cell
@@ -20,7 +21,8 @@ class MovieCollectionCell: UICollectionViewCell {
         let imageURL = NSURL(string: url)
         let request = NSURLRequest(URL: imageURL!)
         
-        self.lblTitle.text = movie["title"] as? String
+        self.lblTitle.text = (movie["title"] as! String) + " (" + String(movie["year"]!) + ")"
+        self.lblRelease.text = movie.valueForKeyPath("release_dates.theater") as? String
         self.imgThumb.setImageWithURLRequest(request,
             placeholderImage: self.imgThumb.image,
             success: { (request, response, image) -> Void in
