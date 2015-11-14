@@ -33,6 +33,7 @@ class MovieTableCell: UITableViewCell {
                 self.imgThumb.image = image
             
                 // If response == nil means that the image came out of that internal cache without making an HTTP request
+                // Do animation if image come from request (not cached)
                 if (response != nil) {
                     self.imgThumb.alpha = 0;
                     UIView.animateWithDuration(1) { () -> Void in
