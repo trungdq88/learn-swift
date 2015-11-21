@@ -21,8 +21,6 @@ class BusinessCellView: UITableViewCell {
     
     // Show information to cell
     func show(business: Business) {
-        // imgThumb
-        // imgRating
         if (business.imageURL != nil) {
             loadAndFade(imgThumb, imageURL: business.imageURL!)
         }
@@ -33,7 +31,11 @@ class BusinessCellView: UITableViewCell {
         lblReviews.text = String(business.reviewCount!) +
             " review" + (business.reviewCount == 1 ? "" : "s")
         lblAddress.text = business.address!
-        lblCategories.text = business.categories!
+        if business.categories != nil {
+            lblCategories.text = business.categories!
+        } else {
+            lblCategories.text = ""
+        }
         lblDistance.text = business.distance!
     }
     
