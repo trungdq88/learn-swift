@@ -183,10 +183,16 @@ class CategoryTableHandler: NSObject, UITableViewDelegate, UITableViewDataSource
     // By default, select no categories
     let DEFAULT_CATEGORY_SELECT = false
     
+    // Delegate to track selected categories count
+    var categoryTableDelegate : CategoryTableDelegate!
+    
+    // Hard coded categories
     var categories = [Category]()
     
+    // Category list for filter (used in search bar)
+    var filter = ""
+    
     override init() {
-        super.init()
         // Convert that hard coded categories to our Model
         categories = data.map { Category(name: $0["name"], alias: $0["code"]) }
     }
@@ -195,10 +201,19 @@ class CategoryTableHandler: NSObject, UITableViewDelegate, UITableViewDataSource
     // Key: category alias, value: true if category is selected
     var selectedCategories = [String: Bool]()
     
+    // Get active list category based on filter
+    func getActiveList() -> [Category] {
+        if filter == "" {
+            return categories
+        } else {
+            return categories.filter { $0.name.containsString(filter) }
+        }
+    }
+    
     // Return cell
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("categoryCell") as! CategoryCellView
-        let category = categories[indexPath.row] as Category
+        let category = getActiveList()[indexPath.row] as Category
         let selected = selectedCategories[category.alias] == nil ? DEFAULT_CATEGORY_SELECT : selectedCategories[category.alias]! as Bool
         cell.show(category, selected: selected)
         cell.categoryActivateDelegate = self
@@ -206,7 +221,7 @@ class CategoryTableHandler: NSObject, UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return categories.count
+        return getActiveList().count
     }
     
     // Receive category activated/deactivated result from cell
@@ -217,6 +232,11 @@ class CategoryTableHandler: NSObject, UITableViewDelegate, UITableViewDataSource
         
         // Set to map
         selectedCategories[category.alias] = value
+        
+        // Call delegate (if any)
+        if categoryTableDelegate != nil {
+            categoryTableDelegate.onSelectedCountChanged(selectedCategories.filter { $0.1 }.count)
+        }
     }
     
     // Get list of selected category alias
@@ -231,4 +251,8 @@ class CategoryTableHandler: NSObject, UITableViewDelegate, UITableViewDataSource
             selectedCategories[alias] = true
         }
     }
+}
+
+protocol CategoryTableDelegate {
+    func onSelectedCountChanged(count: Int)
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SettingViewController: UIViewController {
+class SettingViewController: UIViewController, CategoryTableDelegate, UISearchBarDelegate {
     
     // Delegate for outside usage
     var settingViewDelegate: SettingViewDelegate!
@@ -17,6 +17,8 @@ class SettingViewController: UIViewController {
     @IBOutlet var sgmDistance: UISegmentedControl!
     @IBOutlet var sgmSort: UISegmentedControl!
     @IBOutlet var tblCategories: UITableView!
+    @IBOutlet var lblSelectedCount: UILabel!
+    @IBOutlet var srhCategory: UISearchBar!
     
     // Setting
     var filter : FilterSetting!
@@ -31,6 +33,12 @@ class SettingViewController: UIViewController {
         tblCategories.delegate = handler
         tblCategories.dataSource = handler
         tblCategories.reloadData()
+        
+        // Delegate to track selected count
+        handler.categoryTableDelegate = self
+        
+        // Handler for category search
+        srhCategory.delegate = self
         
         // Load previous filter setting
         loadFilter()
@@ -47,6 +55,11 @@ class SettingViewController: UIViewController {
             settingViewDelegate.onFilterSettingChange(filter)
         }
         
+    }
+    
+    // Show number of selected categories
+    func refreshSelectedCount(count: Int) {
+        lblSelectedCount.text = "Selected \(count) categor\(count == 1 ? "y" : "ies")"
     }
     
     // Load filter from previous setting
@@ -76,6 +89,9 @@ class SettingViewController: UIViewController {
         // Set selected category alias
         handler.setSelectedCategoryAliases(filter.categories)
         
+        // Show selected count
+        let count = handler.getSelectedCategoryAliases().count;
+        refreshSelectedCount(count)
     }
     
     // Set filter from user input
@@ -111,6 +127,28 @@ class SettingViewController: UIViewController {
         // Set selected category alias
         filter.categories = handler.getSelectedCategoryAliases()
         
+    }
+    
+    // Track number of selected categories
+    func onSelectedCountChanged(count: Int) {
+        refreshSelectedCount(count)
+    }
+    
+    // Search text change
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        // Filter by category name
+        handler.filter = searchText
+        tblCategories.reloadData()
+    }
+    
+    // Search button click
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        srhCategory.endEditing(true)
+    }
+    
+    // Search cancel button click
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        srhCategory.endEditing(true)
     }
 }
 
