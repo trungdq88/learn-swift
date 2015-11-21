@@ -220,6 +220,7 @@ class CategoryTableHandler: NSObject, UITableViewDelegate, UITableViewDataSource
         return cell
     }
     
+    // Num row
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return getActiveList().count
     }
@@ -253,6 +254,7 @@ class CategoryTableHandler: NSObject, UITableViewDelegate, UITableViewDataSource
     }
 }
 
+// Protocol for select count change event
 protocol CategoryTableDelegate {
     func onSelectedCountChanged(count: Int)
 }

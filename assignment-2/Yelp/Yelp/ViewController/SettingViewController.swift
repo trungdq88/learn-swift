@@ -10,9 +10,12 @@ import UIKit
 
 class SettingViewController: UIViewController, CategoryTableDelegate, UISearchBarDelegate {
     
+    let TOP_SECTION_HEIGHT = 200
+    
     // Delegate for outside usage
     var settingViewDelegate: SettingViewDelegate!
     
+    @IBOutlet var viwTopSection: UIView!
     @IBOutlet var swhDeal: UISwitch!
     @IBOutlet var sgmDistance: UISegmentedControl!
     @IBOutlet var sgmSort: UISegmentedControl!
@@ -20,6 +23,7 @@ class SettingViewController: UIViewController, CategoryTableDelegate, UISearchBa
     @IBOutlet var lblSelectedCount: UILabel!
     @IBOutlet var srhCategory: UISearchBar!
     
+    @IBOutlet var cntTopSection: NSLayoutConstraint!
     // Setting
     var filter : FilterSetting!
     
@@ -139,6 +143,13 @@ class SettingViewController: UIViewController, CategoryTableDelegate, UISearchBa
         // Filter by category name
         handler.filter = searchText
         tblCategories.reloadData()
+        
+        // Why the [X] button does not trigger searchBarCancelButtonClicked?
+        // Workaround: http://stackoverflow.com/a/33458250/1420186
+        // The user clicked the [X] button or otherwise cleared the text.
+        if (searchText.characters.count == 0) {
+            searchBar.performSelector("resignFirstResponder", withObject: nil, afterDelay: 0.1)
+        }
     }
     
     // Search button click
@@ -150,8 +161,22 @@ class SettingViewController: UIViewController, CategoryTableDelegate, UISearchBa
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         srhCategory.endEditing(true)
     }
+    
+    // Resize table view when start searching (full screen)
+    // Aww... I'm suck at animating
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+        cntTopSection.constant = 0
+        viwTopSection.frame = CGRectMake(0 , 0, viwTopSection.frame.width, 0)
+    }
+    
+    // Resize table view when stop searching
+    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
+        cntTopSection.constant = CGFloat(TOP_SECTION_HEIGHT)
+        viwTopSection.frame = CGRectMake(0 , 0, viwTopSection.frame.width, CGFloat(TOP_SECTION_HEIGHT))
+    }
 }
 
+// Protocal for filter setting change event
 protocol SettingViewDelegate {
     func onFilterSettingChange(filter: FilterSetting)
 }

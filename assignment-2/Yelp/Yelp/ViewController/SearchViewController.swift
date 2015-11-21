@@ -14,6 +14,9 @@ class SearchViewController: UIViewController, UISearchBarDelegate, SettingViewDe
     // The table
     @IBOutlet var tblBusiness: UITableView!
     
+    // Empty text label
+    @IBOutlet var lblEmpty: UILabel!
+    
     // Search bar
     @IBOutlet var searchBar: UISearchBar!
     
@@ -54,15 +57,30 @@ class SearchViewController: UIViewController, UISearchBarDelegate, SettingViewDe
             self.handler.businesses = businesses
             dispatch_async(dispatch_get_main_queue(), {() -> Void in
                 self.tblBusiness.reloadData()
+                self.setEmptyView()
                 JTProgressHUD.hide()
             })
         }
     }
     
+    // Hide the table if there is no result (a message will be displayed instead)
+    func setEmptyView() {
+        if handler.businesses.count > 0 {
+            tblBusiness.hidden = false
+            lblEmpty.hidden = true
+        } else {
+            tblBusiness.hidden = true
+            lblEmpty.hidden = false
+        }
+    }
+    
+    // Trigger search
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         doSearch()
         searchBar.endEditing(true)
     }
+    
+    // Set search text
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         self.searchText = searchText
     }

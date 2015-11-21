@@ -31,6 +31,7 @@ class CategoryCellView: UITableViewCell {
 
 }
 
+// Protocol for switch button change event
 protocol CategoryActivateDelegate {
     func onCategoryActivateChanged(category: Category!, value: Bool)
 }
